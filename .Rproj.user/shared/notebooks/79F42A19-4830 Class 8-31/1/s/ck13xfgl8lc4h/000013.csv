@@ -1,0 +1,4 @@
+"0","#Method 1"
+"0","library(moderndive)"
+"0","Fittedandresiduals <-get_regression_points(toluca_LS_model)"
+"0","Fittedandresiduals"

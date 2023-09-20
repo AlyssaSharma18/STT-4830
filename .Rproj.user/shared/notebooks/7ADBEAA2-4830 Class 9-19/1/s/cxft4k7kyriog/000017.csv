@@ -1,0 +1,5 @@
+"0","toluca <- read.table(""http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01TA01.txt"", sep ="""" , header = FALSE)"
+"0",""
+"0",""
+"0","#Look at the first 6 entries"
+"0","head(toluca)"

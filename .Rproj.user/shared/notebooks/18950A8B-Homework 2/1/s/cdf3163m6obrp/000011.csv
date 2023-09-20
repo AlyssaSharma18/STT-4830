@@ -1,0 +1,4 @@
+"0","#here is the problem 1.24 code"
+"0","library(moderndive)"
+"0","Fittedandresiduals <-get_regression_points(ct_LS_model)"
+"0","Fittedandresiduals"

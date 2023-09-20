@@ -1,0 +1,5 @@
+"0","x <- c(1,0,2,0,3,1,0,1,2,0)"
+"0","y <- c(16,9,17,12,22,13,8,15,19,11)"
+"0",""
+"0","timetransvsbroke <- data.frame(x,y)"
+"0","head(timetransvsbroke)"

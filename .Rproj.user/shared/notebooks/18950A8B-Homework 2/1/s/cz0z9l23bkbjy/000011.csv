@@ -1,0 +1,6 @@
+"0","library(ggplot2)"
+"0","ggplot(adf, aes(x = act, y = gpa)) +"
+"0","  geom_point() +"
+"0","  geom_smooth(method = ""lm"", se = FALSE) +"
+"0","  labs(x = ""act"", y = ""gpa"", title = ""1.19 example scatter plot"") +"
+"0","  theme_bw()"

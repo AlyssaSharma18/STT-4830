@@ -1,0 +1,48 @@
+---
+title: "4830 Class 9-10 Chap 3"
+author: "Alyssa Sharma"
+date: "2023-09-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+toluca <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01TA01.txt", sep ="" , header = FALSE)
+
+
+#Look at the first 6 entries
+head(toluca)
+```
+
+```{r}
+colnames(toluca) <- c("lotSize", "hours")
+
+#Look at the first 6 entries
+head(toluca)
+
+tolucaDF <- data.frame(toluca)
+head(tolucaDF)
+```
+
+```{r}
+library(ggplot2)
+ggplot(data = tolucaDF, aes(x = lotSize)) + geom_dotplot(color = "blue", fill = "orchid4", dotsize = .5) + theme_bw()
+```
+
+
+```{r}
+#plot(tolucaDF$lotSize, type = "b", lty = 2, xlab = "Run", ylab = "Lot Size") title("Sequence Plot")
+
+tolucaDF$rank <- c(1:25)
+ggplot(data = tolucaDF, aes(x = rank, y = lotSize )) +
+geom_point(color = "blue") +
+theme_bw()+
+geom_line()+
+ggtitle("Sequence Plot")
+```
+
+
+

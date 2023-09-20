@@ -1,0 +1,5 @@
+"0","ggplot(toluca, aes(x = lotSize, y = hours)) +"
+"0","  geom_point() +"
+"0","  labs(x = ""Lot Size"", y = ""Work Hours"", title = ""Toluca example, LS line added"") +"
+"0","  geom_smooth(method = ""lm"", se = FALSE) +"
+"0","  theme_bw()"

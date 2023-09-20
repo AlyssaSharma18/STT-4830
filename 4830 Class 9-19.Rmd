@@ -1,0 +1,80 @@
+---
+title: "Notes 9/19"
+author: "Alyssa Sharma"
+date: "2023-09-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r}
+toluca <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01TA01.txt", sep ="" , header = FALSE)
+
+
+#Look at the first 6 entries
+head(toluca)
+
+colnames(toluca) <- c("lotSize", "hours")
+
+#Look at the first 6 entries
+head(toluca)
+
+
+```
+
+
+
+```{r}
+library(Matrix)
+n <- nrow(toluca) # Number of observations
+n
+
+X <- toluca$lotSize
+Y <- toluca$hours
+
+Y <- as.matrix(Y) 
+Y
+```
+
+```{r}
+X <- cbind(rep(1,n), X) # Adding a column of ones to make the X matrix
+X                       # This is your X matrix
+```
+```{r}
+Xt <- t(X) # Taking the transpose of X matrix
+Xt
+```
+
+```{r}
+XtX <- Xt %*% X
+XtX
+
+XtY <- Xt %*% Y
+XtY
+
+b <- XtXinv %*% Xt %*% Y
+b
+
+XtXinv <- solve(XtX)
+XtXinv
+
+toluca_LS_model <- lm(hours ~ lotSize, data = toluca)
+summary(toluca_LS_model)
+```
+
+```{r}
+Yhat <- X %*% b # Fitted Values
+Yhat
+```
+
+```{r}
+e <- Y - Yhat # Residuals
+e
+```
+
+
+
+

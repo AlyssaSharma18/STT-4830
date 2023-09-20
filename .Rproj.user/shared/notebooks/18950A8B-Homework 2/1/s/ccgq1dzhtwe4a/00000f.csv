@@ -1,0 +1,5 @@
+"0","ggplot(copyvstime, aes(x = copy, y = time1)) +"
+"0","  geom_point() +"
+"0","  labs(x = "" number of copiers serviced"", y = ""total number of minutes spent by the service person"", title = ""1.20 example, LS line added"") +"
+"0","  geom_smooth(method = ""lm"", se = FALSE) +"
+"0","  theme_bw()"

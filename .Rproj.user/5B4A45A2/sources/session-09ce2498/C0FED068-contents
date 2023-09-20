@@ -1,0 +1,185 @@
+---
+title: "Homework 2"
+author: "Alyssa Sharma"
+date: "2023-09-12"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+# Question 1.19
+Part a:
+
+The least squares estimate of $\beta_1$ is 0.03883 according to the summary function. The least squares estimate of $\beta_0$ is  2.11405 according to the summary function.
+
+The estimated regression function is $\hat{Y_i} = 2.11405 + 0.03883(X_i) + \epsilon$
+
+```{r cars}
+adf <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01PR19.txt")
+
+head(adf)
+
+colnames(adf) <- c("gpa","act")
+
+a_LS_model <- lm(gpa ~ act, data = adf)
+summary_a_LS_model <- summary(a_LS_model)
+```
+
+
+
+```{r pressure, echo=FALSE}
+summary_a_LS_model
+```
+
+
+Part b:
+
+The estimated regression function does not seem to fit the data well.
+```{r}
+library(ggplot2)
+ggplot(adf, aes(x = act, y = gpa)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "act", y = "gpa", title = "1.19 example scatter plot") +
+  theme_bw()
+```
+
+Part c:
+
+The point estimate of GPA when the ACT test score is 30 is $\hat{Y_{12}} = 3.279$.
+```{r}
+library(moderndive)
+Fittedandresiduals <-get_regression_points(a_LS_model)
+Fittedandresiduals
+
+#Method 2
+#Simply use the summary_toluca_LS_model object to get residuals and fitted values
+
+#Here is 1.23:
+sumris <- sum(Fittedandresiduals$residual)
+sse <- sum((Fittedandresiduals$residual)^2)
+sumris
+sse
+
+#part b
+mse <- sse/(nrow(adf) - 2)
+mse
+sqrt(mse)
+  
+```
+Part d:
+The point estimate of the change in the mean response when the entrance test score increases by one point is $\beta_1$, which is equal to 0.03883. 
+
+# Question 1.20
+Part a:
+
+The estimated regression function is $\hat{Y_i} = 0.254192 + 0.063683(X_i) + \epsilon$
+
+Here is the code for 1.20:
+
+```{r}
+copyvstime <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01PR20.txt", sep ="" , header = FALSE)
+
+head(copyvstime)
+
+colnames(copyvstime) <- c("copy","time1")
+
+ct_LS_model <- lm(time1 ~ copy, data = copyvstime)
+summary_ct_LS_model <- summary(ct_LS_model)
+summary_ct_LS_model
+```
+
+Part b:
+
+The estimated regression function fits the data very well. The residuals are quite small as compared to the previous problem. There is a strong positive correlation in both the estimated regression function and in the original data.
+```{r}
+ggplot(copyvstime, aes(x = copy, y = time1)) +
+  geom_point() +
+  labs(x = " number of copiers serviced", y = "total number of minutes spent by the service person", title = "1.20 example, LS line added") +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+Part c:
+$\beta_0$ has no meaning in this problem. If 0 copiers are serviced, then in the real world, the number of minutes spent servicing is also going to be 0, not 0.254192.
+
+Part d:
+The point estimate of the mean service time when 5 copiers are serviced is 0.572607. This number is calculated below. 
+
+```{r}
+library(moderndive)
+Fittedandresiduals <-get_regression_points(ct_LS_model)
+Fittedandresiduals
+
+a <- .254192 + (.063683*5)
+a
+
+
+
+```
+# Question 1.23
+
+Part a:
+The residuals sum to -0.005, which is approximately 0. This number may have been produced due to a floating point error. 
+Part b: 
+The estimate of $\sigma^2$ is 0.3883074. The estimate of $\sigma$ is 0.6231431.
+```{r}
+library(moderndive)
+Fittedandresiduals <-get_regression_points(a_LS_model)
+Fittedandresiduals
+
+#Method 2
+#Simply use the summary_toluca_LS_model object to get residuals and fitted values
+
+#Here is 1.23:
+sumris <- sum(Fittedandresiduals$residual)
+sse <- sum((Fittedandresiduals$residual)^2)
+sumris
+sse
+
+#part b
+mse <- sse/(nrow(adf) - 2)
+mse
+sqrt(mse)
+```
+
+
+# Question 1.24
+
+Part a:
+
+The residuals $e_i$ are computed with the get_regression_points formula below. The sum of the residuals $\Sigma{e_i}$ is -0.002 which is approximately zero. The sum of the squared residuals $\Sigma{e_i}^2$ is 14.47071. The sum of squared residuals is much larger than the sum of the residuals.
+
+
+Part b: 
+The estimate of $\sigma^2$ is 0.3365282. The estimate of $\sigma$ is 0.5801105. These values are expressed in minutes serviced and squared minutes serviced.
+
+
+
+```{r}
+#here is the problem 1.24 code
+library(moderndive)
+Fittedandresiduals <-get_regression_points(ct_LS_model)
+Fittedandresiduals
+
+#a <- .254192 + (.063683*5)
+#a
+
+sumris <- sum(Fittedandresiduals$residual)
+sumris
+sumrissq <-  sum((Fittedandresiduals$residual)^2)
+sumrissq
+b <- sumrissq/(nrow(copyvstime) - 2)
+b
+sqrt(b)
+```
+
+
+
+

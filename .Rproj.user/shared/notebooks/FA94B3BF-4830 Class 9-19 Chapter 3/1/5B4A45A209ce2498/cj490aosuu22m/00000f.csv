@@ -1,0 +1,8 @@
+"0","#plot(tolucaDF$lotSize, type = ""b"", lty = 2, xlab = ""Run"", ylab = ""Lot Size"") title(""Sequence Plot"")"
+"0",""
+"0","tolucaDF$rank <- c(1:25)"
+"0","ggplot(data = tolucaDF, aes(x = rank, y = lotSize )) +"
+"0","geom_point(color = ""blue"") +"
+"0","theme_bw()+"
+"0","geom_line()+"
+"0","ggtitle(""Sequence Plot"")"

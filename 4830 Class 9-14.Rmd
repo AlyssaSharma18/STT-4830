@@ -1,0 +1,57 @@
+---
+title: "Notes 4830 9/14"
+author: "Alyssa Sharma"
+date: "2023-09-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Let's follow along from class using the Toluca data set.
+
+First we retrieve the data set from the URL
+```{r}
+toluca <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01TA01.txt", sep ="" , header = FALSE)
+
+#Now rename Columns
+colnames(toluca) <- c("lotSize", "hours")
+
+#Look at the first 6 entries
+head(toluca)
+```
+
+Now let's create the matrix X, denoted as $\textbf{X}$ and the matrix Y, denoted as $\textbf{Y}$
+
+```{r}
+library(Matrix)
+n <- nrow(toluca) # Number of observations
+n
+
+X <- toluca$lotSize
+X <- as.matrix(X)
+X <- cbind(rep(1,n), X)
+print('This is X')
+X
+
+Y <- toluca$hours
+Y <- as.matrix(Y) 
+print('This is Y')
+Y                       # This is your vector Y
+```
+Now let's find X'X denoted by $\textbf{X}^T \textbf{X}$. To multiply matrices in R we use the command %*% from the matrix library.
+
+```{r}
+Xt <- t(X) # Taking the transpose of X matrix
+Xt
+
+XtX <- Xt %*% X
+XtX
+```
+
+```{r}
+XtXinv <- solve(XtX)
+XtXinv
+```
+

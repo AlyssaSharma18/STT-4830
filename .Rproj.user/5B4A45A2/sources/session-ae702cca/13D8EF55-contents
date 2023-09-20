@@ -1,0 +1,51 @@
+
+Notes For 8/31
+```{r}
+install.packages("ggplot2")
+```
+
+
+```{r}
+toluca <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01TA01.txt", sep ="" , header = FALSE)
+
+
+#Look at the first 6 entries
+head(toluca)
+```
+
+```{r}
+colnames(toluca) <- c('lotSize' , 'hours')
+
+library(ggplot2)
+ggplot(toluca, aes(x = lotSize, y = hours)) +
+  geom_point() +
+  labs(x = "Lot Size", y = "Work Hours", title = "Toluca example scatter plot") +
+  theme_bw()
+```
+
+```{r}
+ggplot(toluca, aes(x = lotSize, y = hours)) +
+  geom_point() +
+  labs(x = "Lot Size", y = "Work Hours", title = "Toluca example, LS line added") +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+
+```{r}
+toluca_LS_model <- lm(hours ~ lotSize, data = toluca)
+summary_toluca_LS_model <- summary(toluca_LS_model)
+summary_toluca_LS_model
+```
+
+```{r}
+#Method 1
+library(moderndive)
+Fittedandresiduals <-get_regression_points(toluca_LS_model)
+Fittedandresiduals
+
+#Method 2
+#Simply use the summary_toluca_LS_model object to get residuals and fitted values
+```
+
+Here is the code for 1.20

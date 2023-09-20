@@ -1,0 +1,93 @@
+---
+title: "Quiz 2"
+author: "Alyssa Sharma"
+date: "2023-09-14"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+x <- c(1,0,2,0,3,1,0,1,2,0)
+y <- c(16,9,17,12,22,13,8,15,19,11)
+
+timetransvsbroke <- data.frame(x,y)
+head(timetransvsbroke)
+
+tbmod <- lm(y ~ x, data = timetransvsbroke)
+summary(tbmod)
+```
+Part a:
+
+The estimated regression function is $\hat{Y} = 10.2000 + 4.0000(X_i)$
+
+Part b: 
+```{r}
+library(moderndive)
+library(ggplot2)
+ggplot(data = timetransvsbroke, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  theme_bw() +
+  labs(x = "Times Carton Transferred from Aircraft to Aircraft", y = "Number of Ampules Found to be Broken", title = "Broken vs Transfers")
+```
+
+Part c:
+The linear regression function appears to be a good fit here.
+
+Part d:
+A point estimate of the expected numnber of broken ampumles when X = 1 transfers are made is 14.2 broken ampules.
+
+
+```{r}
+
+point <- get_regression_points(tbmod)
+point
+```
+
+Part e:
+The estimated increase in the expected number of ampules broken when there are 2 transfers is going to be $b_i * 2$, which equals 8.
+
+```{r}
+2*4
+```
+
+
+Part f:
+
+Because $\hat{Y_1} = 14.2$ according to the get_regression_points function, and the coordinate $(\bar{X}, \bar{Y}) = (1,14.2)$, the fitted regression line goes through the point $(\bar{X}, \bar{Y}) = (1,14.2)$.
+```{r}
+xbar <- mean(x)
+ybar <- mean(y)
+xbar
+ybar
+```
+
+Part g:
+The residual for the first case is 1.8 broken ampules.
+```{r}
+
+```
+
+Part h: 
+ The two values are equal. $e_i = y_i - \hat{y} = \epsilon_i$
+ 
+Part i:
+
+The sum of square residuals is 2.773339e-32. The MSE is 3.466674e-33
+```{r}
+sumris <- sum(point$residual)
+sumrissq <- sumris^2
+sumrissq
+
+mse <- sumrissq/(nrow(timetransvsbroke) - 2)
+mse
+```
+
+Part j:
+
+The estimated MSE is 3.466674e-33.

@@ -1,0 +1,102 @@
+---
+title: "homework 2"
+author: "Alyssa Sharma"
+date: "2023-09-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+Here is the code for 1.19:
+
+```{r cars}
+adf <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01PR19.txt")
+
+head(adf)
+
+colnames(adf) <- c("gpa","act")
+
+a_LS_model <- lm(gpa ~ act, data = adf)
+summary_a_LS_model <- summary(a_LS_model)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+summary_a_LS_model
+```
+
+
+```{r}
+library(ggplot2)
+ggplot(adf, aes(x = act, y = gpa)) +
+  geom_point() +
+  labs(x = "act", y = "gpa", title = "1.19 example scatter plot") +
+  theme_bw()
+```
+```{r}
+library(moderndive)
+Fittedandresiduals <-get_regression_points(a_LS_model)
+Fittedandresiduals
+
+#Method 2
+#Simply use the summary_toluca_LS_model object to get residuals and fitted values
+
+#Here is 1.23:
+sumris <- sum(Fittedandresiduals$residual)
+sse <- sum((Fittedandresiduals$residual)^2)
+sumris
+sse
+
+#part b
+mse <- sse/(nrow(adf) - 2)
+mse
+sqrt(mse)
+  
+```
+Here is the code for 1.20:
+
+```{r}
+copyvstime <- read.table("http://www.cnachtsheim-text.csom.umn.edu/Kutner/Chapter%20%201%20Data%20Sets/CH01PR20.txt", sep ="" , header = FALSE)
+
+head(copyvstime)
+
+colnames(copyvstime) <- c("copy","time1")
+
+ct_LS_model <- lm(time1 ~ copy, data = copyvstime)
+summary_ct_LS_model <- summary(ct_LS_model)
+summary_ct_LS_model
+```
+```{r}
+ggplot(copyvstime, aes(x = copy, y = time1)) +
+  geom_point() +
+  labs(x = " number of copiers serviced", y = "total number of minutes spent by the service person", title = "1.20 example, LS line added") +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+```{r}
+library(moderndive)
+Fittedandresiduals <-get_regression_points(ct_LS_model)
+Fittedandresiduals
+
+a <- .254192 + (.063683*5)
+#a
+
+#here is the problem 1.24 code
+sumris <- sum(Fittedandresiduals$residual)
+#sumris
+sumrissq <-  sum((Fittedandresiduals$residual)^2)
+b <- sumrissq/(nrow(copyvstime) - 2)
+b
+sqrt(b)
+
+```
+
+
+

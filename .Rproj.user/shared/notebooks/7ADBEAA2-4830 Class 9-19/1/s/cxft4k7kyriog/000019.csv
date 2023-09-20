@@ -1,0 +1,5 @@
+"0",""
+"0","colnames(toluca) <- c(""lotSize"", ""hours"")"
+"0",""
+"0","#Look at the first 6 entries"
+"0","head(toluca)"
